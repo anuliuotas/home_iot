@@ -1,0 +1,125 @@
+substitutions:
+  device_name: d1mini-bme680-002
+  friendly: bme680-002
+  roottopic: device
+
+  mqqt_root_topic: "device"
+
+esp8266:
+  board: d1_mini
+
+esphome:
+  name: ${device_name}
+
+packages:
+  setup: !include
+    file: inc/pkg_setup.yml
+
+ota:
+  # safe_mode: true
+  # password: !secret ota_password
+
+logger:
+  level: DEBUG
+  baud_rate: 9600
+
+wifi:
+  networks:
+  - ssid: !secret wifi_ssid_home
+    password: !secret wifi_password_home
+  - ssid: !secret wifi_ssid_makerspace
+    password: !secret wifi_password_makerspace
+
+
+captive_portal:
+
+mqtt:
+  broker: "192.168.0.200"
+  discovery_object_id_generator: device_name
+  topic_prefix: ${mqqt_root_topic}/${device_name}
+
+# Configuration >>  
+
+dallas:
+  - pin: GPIO04
+
+i2c:
+  sda: GPIO0
+  scl: GPIO2
+  scan: true
+  id: bus_a
+
+sensor:
+  - platform: dallas
+    index: 0
+    name: "temp"
+    force_update: True
+    id: accurate_temp
+    state_topic: ${mqqt_root_topic}/${device_name}/ds18b20/temperature/get
+
+  - platform: bme680
+    iir_filter: 7x
+    temperature:
+      name: "bme680_temp"
+      internal: True
+      id: meas_temp
+      force_update: True
+    pressure:
+      name: "pressure"
+      force_update: True
+      state_topic: ${mqqt_root_topic}/${device_name}/bme680/pressure/get
+    humidity:
+      name: "humidity"
+      force_update: True
+      id: hum
+      filters: 
+        - lambda: return (x * pow(2.71828183, 243.12 * 17.62 * (id(meas_temp).state - id(accurate_temp).state) / (243.12 + id(meas_temp).state) / (243.12 + id(accurate_temp).state)));
+      state_topic: ${mqqt_root_topic}/${device_name}/bme680/humidity/get
+    gas_resistance:
+      name: "gas_resistance"
+      force_update: True
+      id: g_res
+      filters:
+        - filter_out: nan
+      state_topic: ${mqqt_root_topic}/${device_name}/bme680/gas_resistance/get
+    address: 0x76
+    update_interval: 60s
+    i2c_id: bus_a
+
+  - platform: template
+    name: "iaq"
+    id: iaq
+    unit_of_measurement: IAQ
+    force_update: True
+    lambda: 'return log(id(g_res).state) + 0.04 *  id(hum).state;'  
+    filters:
+        - filter_out: nan
+
+#text_sensor:
+#  - platform: template
+#    name: "iaq_classification"
+#    lambda: |-
+#      if ( int(id(iaq).state) <= 50) {
+#        return {"Excellent"};
+#      }
+#      else if (int(id(iaq).state) >= 51 && int(id(iaq).state) <= 100) {
+#        return {"Good"};
+#      }
+#      else if (int(id(iaq).state) >= 101 && int(id(iaq).state) <= 150) {
+#        return {"Lightly polluted"};
+#      }
+#      else if (int(id(iaq).state) >= 151 && int(id(iaq).state) <= 200) {
+#        return {"Moderately polluted"};
+#      }
+#      else if (int(id(iaq).state) >= 201 && int(id(iaq).state) <= 250) {
+#        return {"Heavily polluted"};
+#      }
+#      else if (int(id(iaq).state) >= 251 && int(id(iaq).state) <= 350) {
+#        return {"Severely polluted"};
+#      }
+#      else if (int(id(iaq).state) >= 351) {
+#        return {"Extremely polluted"};
+#      }
+#      else {
+#        return {"error"};
+#      }

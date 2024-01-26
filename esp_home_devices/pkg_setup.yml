@@ -1,0 +1,55 @@
+ota:
+  safe_mode: true
+  password: !secret ota_password
+
+esphome:
+  name: ${device_name}
+
+wifi:
+  networks:
+  - ssid: !secret wifi_ssid_home
+    password: !secret wifi_password_home
+  - ssid: !secret wifi_ssid_makerspace
+    password: !secret wifi_password_makerspace
+
+
+captive_portal:
+
+mqtt:
+  discovery_object_id_generator: device_name
+  id: mq
+  broker: !secret broker_host
+  reboot_timeout: 20s
+  discovery: false
+  topic_prefix: ${mqqt_root_topic}/${device_name}
+  birth_message:
+    topic: ${root_topic}/system/online/get
+    payload: 1
+  will_message:
+    topic: ${root_topic}/system/online/get
+    payload: 0
+  shutdown_message:
+    topic: ${root_topic}/system/online/get
+    payload: 0
+
+sensor:
+  - platform: wifi_signal
+    name: wifi_signal
+    update_interval: 3s
+    state_topic: ${root_topic}/system/wifi_signal/get
+  - platform: uptime
+    name: uptime
+    update_interval: 3s
+    state_topic: ${root_topic}/system/uptime/get
+
+text_sensor:
+  - platform: wifi_info
+    ip_address:
+      name: ip
+      state_topic: ${root_topic}/system/online/ip
+    ssid:
+      name: ssid
+      state_topic: ${root_topic}/system/online/ssid
+    mac_address:
+      name: mac
+      state_topic: ${root_topic}/system/online/mac

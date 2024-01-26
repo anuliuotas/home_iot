@@ -1,0 +1,86 @@
+substitutions:
+  device_name: d1mini-scd40-001
+  friendly: d1mini-scd40-001
+  roottopic: device
+  mqqt_root_topic: "testing"
+
+esp8266:
+  board: d1_mini
+
+esphome:
+  name: ${device_name}
+
+ota:
+  # safe_mode: true
+  # password: !secret ota_password
+
+logger:
+  level: DEBUG
+  baud_rate: 9600
+
+wifi:
+  networks:
+  - ssid: !secret wifi_ssid_home
+    password: !secret wifi_password_home
+  - ssid: !secret wifi_ssid_makerspace
+    password: !secret wifi_password_makerspace
+
+
+captive_portal:
+
+mqtt:
+  broker: "192.168.0.200"
+  discovery_object_id_generator: device_name
+  topic_prefix: ${mqqt_root_topic}/${device_name}
+
+  on_json_message:
+    topic: ${mqqt_root_topic}/${device_name}/scd41/co2/calibrate
+    then:
+      - scd4x.perform_forced_calibration:
+          value: 419
+          id: my_scd4x
+    
+
+# Configuration >>  
+
+dallas:
+  - pin: GPIO14
+    update_interval: 15s
+
+sensor:
+  - platform: scd4x
+    id: my_scd4x
+    co2:
+      name: "co2_1"
+      force_update: True
+      state_topic: ${mqqt_root_topic}/${device_name}/scd41/co2/get
+    temperature:
+      name: "scd41_temp"
+      id: meas_temp
+      internal: True
+    humidity:
+      name: "humidity_1"
+      force_update: True
+      id: hum
+      filters: 
+        - lambda: return (x * pow(2.71828183, 243.12 * 17.62 * (id(meas_temp).state - id(accurate_temp).state) / (243.12 + id(meas_temp).state) / (243.12 + id(accurate_temp).state)));
+      state_topic: ${mqqt_root_topic}/${device_name}/scd41/humidity/get  
+    i2c_id: bus_a
+    temperature_offset: 0
+    update_interval: 15s
+    
+
+  - platform: dallas
+    #address: 0xe40000001c804228
+    index: 0
+    name: "temp_1"
+    force_update: True
+    id: accurate_temp
+    state_topic: ${mqqt_root_topic}/${device_name}/ds18b20/temperature/get
+    
+
+i2c:
+  sda: GPIO04
+  scl: GPIO05
+  scan: true
+  id: bus_a

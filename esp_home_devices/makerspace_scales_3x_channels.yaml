@@ -1,0 +1,159 @@
+substitutions:
+  scales_window_size: "10"
+  scales_send_every: "10"
+  scales_send_first_at: "10"
+  scales_sample_rate: "200ms"
+  scales_gain: "32"
+  device_name: "mate-scale-3x"
+  mqqt_root_topic: "device"
+  mqqt_retain_message: "false"
+
+ota:
+  safe_mode: true
+  password: !secret ota_password
+
+esphome:
+  name: ${device_name}
+
+esp8266:
+  board: esp12e
+
+# Enable logging
+logger:
+  level: DEBUG
+  baud_rate: 9600
+
+# # Enable Home Assistant API
+# api:
+#   password: ""
+
+wifi:
+  ssid: "makerspace.lt"
+  password: "100 decibelu"
+
+captive_portal:
+
+mqtt:
+  broker: "broker.lan"
+  discovery_object_id_generator: device_name
+  topic_prefix: ${mqqt_root_topic}/${device_name}
+  on_message:
+     topic: ${mqqt_root_topic}/${device_name}/gpio/led/set
+     qos: 0
+     then: 
+      - lambda: |-
+          if (x == "1") {
+            id(onboard_led).turn_off();
+          } else {
+            id(onboard_led).turn_on();
+          }
+          
+dallas:
+  - pin: GPIO14
+    update_interval: 15s
+
+sensor:
+  - platform: hx711
+    id: weight_sensor_ch1 
+    name: "weight_1"
+    dout_pin: GPIO0
+    clk_pin: GPIO2
+    gain: ${scales_gain}
+    update_interval: ${scales_sample_rate}
+    expire_after: 10s
+    accuracy_decimals: 3
+    unit_of_measurement: kg
+    state_topic: ${mqqt_root_topic}/${device_name}/hx711/weight1/get
+    retain: ${mqqt_retain_message}
+    filters:
+      - calibrate_linear:
+          - -16191.100 -> 0
+          - -21657.699 -> 1
+      - sliding_window_moving_average:
+          window_size: ${scales_window_size}
+          send_every: ${scales_send_every}
+          send_first_at: ${scales_send_first_at}
+  
+  - platform: hx711
+    id: weight_sensor_ch2 
+    name: "weight_2"
+    dout_pin: GPIO16
+    clk_pin: GPIO15
+    gain: ${scales_gain}
+    update_interval: ${scales_sample_rate}
+    expire_after: 10s
+    accuracy_decimals: 3
+    unit_of_measurement: kg
+    state_topic: ${mqqt_root_topic}/${device_name}/hx711/weight2/get
+    retain: ${mqqt_retain_message}
+    filters:
+      - calibrate_linear:
+          - -56533.199 -> 0
+          - -62141.199 -> 1
+      - sliding_window_moving_average:
+          window_size: ${scales_window_size}
+          send_every: ${scales_send_every}
+          send_first_at: ${scales_send_first_at}
+  
+  - platform: hx711
+    id: weight_sensor_ch3 
+    name: "weight_3"
+    dout_pin: GPIO4
+    clk_pin: GPIO5
+    gain: ${scales_gain}
+    update_interval: ${scales_sample_rate}
+    expire_after: 10s
+    accuracy_decimals: 3
+    unit_of_measurement: kg
+    state_topic: ${mqqt_root_topic}/${device_name}/hx711/weight3/get
+    retain: ${mqqt_retain_message}
+    filters:
+      - calibrate_linear:
+          - -16434.600 -> 0
+          - -22070.900 -> 1
+      - sliding_window_moving_average:
+          window_size: ${scales_window_size}
+          send_every: ${scales_send_every}
+          send_first_at: ${scales_send_first_at}
+
+  - platform: adc
+    pin: A0
+    name: "battery"
+    update_interval: 10s
+    unit_of_measurement: V
+    raw: true
+    state_topic: ${mqqt_root_topic}/${device_name}/adc/battery/get
+    retain: ${mqqt_retain_message}
+    filters:
+    - multiply: 0.00458030112923
+  
+  - platform: dallas
+    index: 0
+    name: "temp"
+    unit_of_measurement: "°C"
+    state_topic: ${mqqt_root_topic}/${device_name}/ds18b20/temp/get
+    retain: ${mqqt_retain_message}
+
+
+binary_sensor:  
+  - platform: gpio
+    pin: GPIO13
+    name: "Charging indicator"
+    state_topic: ${mqqt_root_topic}/${device_name}/gpio/charging/get
+    retain: ${mqqt_retain_message}
+
+switch:
+  - platform: gpio
+    id: turn_off_switch
+    pin: GPIO12
+    name: "Turn of switch"
+    state_topic: ${mqqt_root_topic}/${device_name}/gpio/kill/get
+    retain: ${mqqt_retain_message}
+
+  - platform: gpio
+    id: onboard_led
+    pin: GPIO3
+    name: "Onboard led"
+    state_topic: ${mqqt_root_topic}/${device_name}/gpio/led/get
+    retain: ${mqqt_retain_message}
+    

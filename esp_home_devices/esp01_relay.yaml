@@ -1,0 +1,72 @@
+substitutions:
+  device_name: esp01-relay-001
+  friendly: esp01-relay-001
+  roottopic: device
+  mqqt_root_topic: "testing"
+
+esp8266:
+  board: esp01_1m
+
+esphome:
+  name: ${device_name}
+
+ota:
+  # safe_mode: true
+  # password: !secret ota_password
+
+logger:
+  level: DEBUG
+  baud_rate: 9600
+
+wifi:
+  networks:
+  - ssid: !secret wifi_ssid_home
+    password: !secret wifi_password_home
+  - ssid: !secret wifi_ssid_makerspace
+    password: !secret wifi_password_makerspace
+
+
+captive_portal:
+
+mqtt:
+  broker: "192.168.0.200"
+  discovery_object_id_generator: device_name
+  topic_prefix: ${mqqt_root_topic}/${device_name}
+
+  # on_json_message:
+  #   topic: ${mqqt_root_topic}/${device_name}/scd41/co2/calibrate
+  #   then:
+  #     - scd4x.perform_forced_calibration:
+  #         value: 419
+  #         id: my_scd4x
+    
+
+# Configuration >>  
+# interval:
+#   - interval: 5s
+#     then:
+#       - switch.toggle: external_sw
+
+
+switch:
+  - platform: gpio
+    pin: GPIO0
+    id: relay
+    name: "Main relay"
+    inverted: true
+
+binary_sensor:
+  - platform: gpio
+    pin: GPIO2
+    id: external_sw
+    filters:
+      - delayed_on_off: 0.5s
+      - lambda: |-
+          if (millis() > 5000) {
+            return x;
+          } else {
+            return {};
+          }
+    on_state:
+    - switch.toggle: "relay"
+ 

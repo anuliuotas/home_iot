@@ -1,0 +1,66 @@
+substitutions:
+  device_name: "ble-hub-1"
+  friendly_name: "BLE Hub"
+  mqqt_root_topic: "device"
+  mqqt_retain_message: "false"
+
+ota:
+  safe_mode: true
+  password: !secret ota_password
+
+esphome:
+  name: ${device_name}
+
+esp32:
+  board: nodemcu-32s
+
+# # Enable logging
+# logger:
+#   level: DEBUG
+#   baud_rate: 9600
+
+wifi:
+  networks:
+  - ssid: !secret wifi_ssid_home
+    password: !secret wifi_password_home
+  - ssid: !secret wifi_ssid_makerspace
+    password: !secret wifi_password_makerspace
+
+
+captive_portal:
+
+mqtt:
+  broker: "192.168.0.200"
+  discovery_object_id_generator: device_name
+  topic_prefix: ${mqqt_root_topic}/${device_name}
+
+
+esp32_ble_tracker:
+
+logger:
+  level: DEBUG
+
+sensor:
+  - platform: b_parasite
+    mac_address: D2:C0:BF:0E:A0:59
+    humidity:
+      name: 'b-parasite Air Humidity'
+      force_update: True
+      state_topic: ${mqqt_root_topic}/b-parasite-1/b_parasite/air_humidity/get
+    temperature:
+      name: 'b-parasite Air Temperature'
+      force_update: True
+      state_topic: ${mqqt_root_topic}/b-parasite-1/b_parasite/air_temperature/get
+    moisture:
+      name: 'b-parasite Soil Moisture'
+      force_update: True
+      state_topic: ${mqqt_root_topic}/b-parasite-1/b_parasite/soil_moisture/get
+    battery_voltage:
+      name: 'b-parasite Battery Voltage'
+      force_update: True
+      state_topic: ${mqqt_root_topic}/b-parasite-1/b_parasite/battery_voltage/get
+    illuminance:
+      name: 'b-parasite Illuminance'
+      force_update: True
+      state_topic: ${mqqt_root_topic}/b-parasite-1/b_parasite/illuminance/get
+

@@ -1,0 +1,3 @@
+esp_home_devices/.esphome
+esp_home_devices/secrets.yaml
+esp_home_devices/venv/*
