@@ -1,0 +1,127 @@
+1697914663: mosquitto version 2.0.18 starting
+1697914663: Config loaded from /mosquitto/config/mosquitto.conf.
+1697914663: Opening ipv4 listen socket on port 1883.
+1697914663: Opening ipv6 listen socket on port 1883.
+1697914663: mosquitto version 2.0.18 running
+1697914664: New connection from 172.18.0.1:38972 on port 1883.
+1697914664: New client connected from 172.18.0.1:38972 as mqtt-explorer-77083722 (p2, c1, k60).
+1697914666: New connection from 192.168.0.41:52679 on port 1883.
+1697914666: New client connected from 192.168.0.41:52679 as d1mini-bme680-001-ecfabcb38528 (p2, c1, k15).
+1697914743: New connection from 192.168.0.41:61512 on port 1883.
+1697914743: Client d1mini-bme680-001-ecfabcb38528 already connected, closing old connection.
+1697914743: New client connected from 192.168.0.41:61512 as d1mini-bme680-001-ecfabcb38528 (p2, c1, k15).
+1697916464: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1697916749: mosquitto version 2.0.18 terminating
+1697916749: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1697916755: mosquitto version 2.0.18 starting
+1697916755: Config loaded from /mosquitto/config/mosquitto.conf.
+1697916755: Opening ipv4 listen socket on port 1883.
+1697916755: Opening ipv6 listen socket on port 1883.
+1697916755: mosquitto version 2.0.18 running
+1697916755: New connection from 172.18.0.1:41616 on port 1883.
+1697916755: New client connected from 172.18.0.1:41616 as mqtt-explorer-77083722 (p2, c1, k60).
+1697916759: New connection from 192.168.0.41:60925 on port 1883.
+1697916759: New client connected from 192.168.0.41:60925 as d1mini-bme680-001-ecfabcb38528 (p2, c1, k15).
+1697917036: New connection from 172.18.0.4:52406 on port 1883.
+1697917036: New client connected from 172.18.0.4:52406 as telegraf-sensor (p2, c1, k60).
+1697917077: Client telegraf-sensor disconnected.
+1697917078: New connection from 172.18.0.1:43912 on port 1883.
+1697917078: New client connected from 172.18.0.1:43912 as telegraf-sensor (p2, c1, k60).
+1697917563: Client telegraf-sensor disconnected.
+1697917563: New connection from 172.18.0.1:58966 on port 1883.
+1697917563: New client connected from 172.18.0.1:58966 as telegraf-sensor (p2, c1, k60).
+1697917573: Client telegraf-sensor disconnected.
+1697917573: New connection from 172.18.0.1:52248 on port 1883.
+1697917573: New client connected from 172.18.0.1:52248 as telegraf-sensor (p2, c1, k60).
+1697917957: Client telegraf-sensor disconnected.
+1697917958: New connection from 172.18.0.1:57096 on port 1883.
+1697917958: New client connected from 172.18.0.1:57096 as telegraf-sensor (p2, c1, k60).
+1697918028: New connection from 192.168.0.41:51889 on port 1883.
+1697918028: Client d1mini-bme680-001-ecfabcb38528 already connected, closing old connection.
+1697918028: New client connected from 192.168.0.41:51889 as d1mini-bme680-001-ecfabcb38528 (p2, c1, k15).
+1697918177: Client telegraf-sensor disconnected.
+1697918178: New connection from 172.18.0.1:55792 on port 1883.
+1697918178: New client connected from 172.18.0.1:55792 as telegraf-sensor (p2, c1, k60).
+1697918210: Client telegraf-sensor disconnected.
+1697918211: New connection from 172.18.0.1:33558 on port 1883.
+1697918211: New client connected from 172.18.0.1:33558 as telegraf-sensor (p2, c1, k60).
+1697918289: Client telegraf-sensor disconnected.
+1697918290: New connection from 172.18.0.1:45734 on port 1883.
+1697918290: New client connected from 172.18.0.1:45734 as telegraf-sensor (p2, c1, k60).
+1697918556: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1697920357: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1697920567: New connection from 192.168.0.41:62866 on port 1883.
+1697920567: Client d1mini-bme680-001-ecfabcb38528 already connected, closing old connection.
+1697920567: New client connected from 192.168.0.41:62866 as d1mini-bme680-001-ecfabcb38528 (p2, c1, k15).
+1697922158: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1697923370: Client telegraf-sensor disconnected.
+1697923526: New connection from 172.18.0.1:40990 on port 1883.
+1697923526: New client connected from 172.18.0.1:40990 as telegraf-sensor (p2, c1, k60).
+1697923645: Client telegraf-sensor disconnected.
+1697923646: New connection from 172.18.0.1:44992 on port 1883.
+1697923646: New client connected from 172.18.0.1:44992 as telegraf-sensor (p2, c1, k60).
+1697923959: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1697924181: Client telegraf-sensor disconnected.
+1697924491: New connection from 172.18.0.1:50144 on port 1883.
+1697924491: New client connected from 172.18.0.1:50144 as telegraf-sensor (p2, c1, k60).
+1697925159: Client telegraf-sensor disconnected.
+1697925160: New connection from 172.18.0.1:59012 on port 1883.
+1697925160: New client connected from 172.18.0.1:59012 as telegraf-sensor (p2, c1, k60).
+1697925760: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1697927561: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1697929362: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1697931163: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1697932964: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1697934765: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1697936566: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1697938367: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1697940168: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1697941969: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1697943770: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1697945571: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1697947372: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1697949173: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1697950974: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1697952775: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1697954576: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1697956377: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1697958178: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1697959979: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1697961780: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1697963581: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1697965382: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1697967183: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1697968919: Client d1mini-bme680-001-ecfabcb38528 has exceeded timeout, disconnecting.
+1697968919: New connection from 192.168.0.41:50121 on port 1883.
+1697968919: New client connected from 192.168.0.41:50121 as d1mini-bme680-001-ecfabcb38528 (p2, c1, k15).
+1697968984: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1697970785: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1697972586: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1697973929: Client d1mini-bme680-001-ecfabcb38528 has exceeded timeout, disconnecting.
+1697974188: New connection from 192.168.0.41:58794 on port 1883.
+1697974188: New client connected from 192.168.0.41:58794 as d1mini-bme680-001-ecfabcb38528 (p2, c1, k15).
+1697974387: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1697974803: New connection from 192.168.0.41:62977 on port 1883.
+1697974803: Client d1mini-bme680-001-ecfabcb38528 already connected, closing old connection.
+1697974803: New client connected from 192.168.0.41:62977 as d1mini-bme680-001-ecfabcb38528 (p2, c1, k15).
+1697976188: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1697976900: New connection from 192.168.0.41:60704 on port 1883.
+1697976900: New client connected from 192.168.0.41:60704 as d1mini-bme680-003-ecfabcb38528 (p2, c1, k15).
+1697976905: Client d1mini-bme680-001-ecfabcb38528 has exceeded timeout, disconnecting.
+1697977025: Client d1mini-bme680-003-ecfabcb38528 has exceeded timeout, disconnecting.
+1697977197: New connection from 192.168.0.83:53360 on port 1883.
+1697977197: New client connected from 192.168.0.83:53360 as d1mini-bme680-002-bcddc23d6e33 (p2, c1, k15).
+1697977289: Client d1mini-bme680-002-bcddc23d6e33 has exceeded timeout, disconnecting.
+1697977354: New connection from 192.168.0.71:63595 on port 1883.
+1697977354: New client connected from 192.168.0.71:63595 as d1mini-bme680-001-cc50e308842c (p2, c1, k15).
+1697977989: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1697978901: Client mqtt-explorer-77083722 disconnected.
+1697979790: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1697981591: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1697983392: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1697985193: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1697985437: Client d1mini-bme680-001-cc50e308842c has exceeded timeout, disconnecting.
+1697986994: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1697988795: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1697990596: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1697992397: Saving in-memory database to /mosquitto/data//mosquitto.db.
